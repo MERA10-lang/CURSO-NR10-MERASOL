@@ -1,226 +1,580 @@
-# IntegraÃ§Ã£o com Shopify - Curso NR10
+# 📝 CÓDIGOS PRINCIPAIS - LANDING PAGE NR10
 
-## ðŸ›’ ConfiguraÃ§Ã£o do Produto no Shopify
-
-### 1. Criar Produto Digital
-
-**InformaÃ§Ãµes BÃ¡sicas:**
-- **TÃ­tulo:** Curso NR10 2025 - CapacitaÃ§Ã£o Completa
-- **DescriÃ§Ã£o:** Curso completo de NR10 para autÃ´nomos, tÃ©cnicos, empreendedores e empresas. Inclui NBR5410 e normas ANEEL.
-- **PreÃ§o:** R$ 29,90
-- **PreÃ§o comparativo:** R$ 197,90
-- **SKU:** NR10-2025-MERASOL
-- **CÃ³digo de barras:** (deixe vazio)
-
-**ConfiguraÃ§Ãµes de Envio:**
-- âœ… Este Ã© um produto digital
-- âœ… NÃ£o requer envio fÃ­sico
-
-**ConfiguraÃ§Ãµes de Estoque:**
-- âœ… NÃ£o rastrear quantidade
-- âœ… Continuar vendendo quando fora de estoque
-
-**SEO:**
-- **TÃ­tulo SEO:** Curso NR10 2025 - R$ 29,90 | MERASOL
-- **Meta descriÃ§Ã£o:** Curso NR10 completo por R$ 29,90. CapacitaÃ§Ã£o para Ã¡rea elÃ©trica com certificado vÃ¡lido. 30 dias de garantia.
-
-### 2. Configurar Checkout
-
-**ConfiguraÃ§Ãµes de Pagamento:**
-```
-PIX: 5% desconto (R$ 28,40)
-CartÃ£o: 12x de R$ 2,49
-Boleto: R$ 29,90
-```
-
-**ConfiguraÃ§Ãµes de Entrega Digital:**
-- Configurar email automÃ¡tico com link de acesso
-- Incluir instruÃ§Ãµes de acesso ao curso
-- Adicionar dados de contato da MERASOL
-
-## ðŸ”— IntegraÃ§Ã£o com Landing Page
-
-### OpÃ§Ã£o 1: Redirecionamento Direto
-
-Substitua os botÃµes atuais por:
+## 🌐 HTML PRINCIPAL (index.html)
 
 ```html
-<!-- BotÃ£o Principal -->
-<button onclick="window.open('https://merasol.myshopify.com/products/curso-nr10-2025', '_blank')" class="btn-primary">
-    ðŸš€ QUERO ME CAPACITAR POR R$ 29,90
-</button>
-
-<!-- BotÃ£o Flutuante -->
-<button onclick="window.open('https://merasol.myshopify.com/products/curso-nr10-2025', '_blank')" class="btn-floating">
-    âš¡ CAPACITAR-SE - R$ 29,90
-</button>
-
-<!-- BotÃ£o Mobile -->
-<button onclick="window.open('https://merasol.myshopify.com/products/curso-nr10-2025', '_blank')">
-    ðŸš€ CAPACITAR POR R$ 29,90
-</button>
-```
-
-### OpÃ§Ã£o 2: Add to Cart Direto
-
-```html
-<!-- Adicionar diretamente ao carrinho -->
-<button onclick="window.open('https://merasol.myshopify.com/cart/add?id=PRODUCT_VARIANT_ID&quantity=1', '_blank')" class="btn-primary">
-    ðŸš€ QUERO ME CAPACITAR POR R$ 29,90
-</button>
-```
-
-### OpÃ§Ã£o 3: Buy Now Button (Mais ConversÃ£o)
-
-```html
-<!-- Compra direta (pula carrinho) -->
-<button onclick="window.open('https://merasol.myshopify.com/cart/add?id=PRODUCT_VARIANT_ID&quantity=1&return_to=/checkout', '_blank')" class="btn-primary">
-    ðŸš€ QUERO ME CAPACITAR POR R$ 29,90
-</button>
-```
-
-## ðŸ“Š Tracking de ConversÃµes
-
-### Google Analytics Enhanced Ecommerce
-
-Adicione no script.js:
-
-```javascript
-// Tracking de clique no botÃ£o
-function trackPurchaseClick() {
-    gtag('event', 'begin_checkout', {
-        currency: 'BRL',
-        value: 29.90,
-        items: [{
-            item_id: 'NR10-2025-MERASOL',
-            item_name: 'Curso NR10 2025',
-            category: 'Curso Digital',
-            quantity: 1,
-            price: 29.90
-        }]
-    });
-}
-
-// Adicionar aos botÃµes
-document.querySelectorAll('.btn-primary').forEach(btn => {
-    btn.addEventListener('click', trackPurchaseClick);
-});
-```
-
-### Facebook Pixel
-
-```javascript
-// Tracking de evento de compra
-function trackFacebookPurchase() {
-    fbq('track', 'InitiateCheckout', {
-        value: 29.90,
-        currency: 'BRL',
-        content_name: 'Curso NR10 2025',
-        content_category: 'Curso Digital',
-        content_ids: ['NR10-2025-MERASOL'],
-        content_type: 'product'
-    });
-}
-```
-
-## ðŸŽ¯ ConfiguraÃ§Ãµes de ConversÃ£o no Shopify
-
-### 1. Abandoned Cart Recovery
-- Configurar emails automÃ¡ticos para carrinho abandonado
-- Oferecer desconto progressivo (5%, 10%, 15%)
-- Enviar apÃ³s 1h, 24h e 72h
-
-### 2. Upsells e Cross-sells
-- Oferecer curso NR10 SEP como upsell
-- Sugerir materiais complementares
-- Bundle com outros cursos
-
-### 3. Reviews e Testimonials
-- Configurar app de reviews (Judge.me, Yotpo)
-- Solicitar avaliaÃ§Ãµes por email pÃ³s-compra
-- Exibir reviews na pÃ¡gina do produto
-
-## ðŸ“§ Email Marketing
-
-### SequÃªncia de Emails PÃ³s-Compra:
-1. **Imediato:** ConfirmaÃ§Ã£o e acesso ao curso
-2. **1 dia:** Boas-vindas e primeiros passos
-3. **3 dias:** Dicas de estudo e suporte
-4. **7 dias:** Check-in de progresso
-5. **15 dias:** Oferta curso NR10 SEP
-6. **30 dias:** SolicitaÃ§Ã£o de review
-
-### Template de Email de Acesso:
-
-```html
-Assunto: âœ… Seu acesso ao Curso NR10 2025 estÃ¡ liberado!
-
-OlÃ¡ [NOME],
-
-ParabÃ©ns! Seu acesso ao Curso NR10 2025 foi liberado.
-
-ðŸ”— ACESSAR CURSO: [LINK]
-ðŸ‘¤ Login: [EMAIL]
-ðŸ”‘ Senha: [SENHA_TEMPORARIA]
-
-ðŸ“ž Suporte: (14) 98838-3852
-ðŸ“§ Email: contato@merasol.com.br
-
-MERASOL SoluÃ§Ãµes em Engenharia e Consultoria
-```
-
-## ðŸ”§ Apps Recomendados para Shopify
-
-1. **Bold Upsell** - Para ofertas complementares
-2. **Klaviyo** - Email marketing avanÃ§ado
-3. **Judge.me** - Sistema de reviews
-4. **ReConvert** - Thank you page otimizada
-5. **Gorgias** - Atendimento ao cliente
-6. **Digital Downloads** - Entrega de produtos digitais
-
-## ðŸ“± ConfiguraÃ§Ã£o Mobile
-
-Certifique-se de que:
-- âœ… Checkout mobile otimizado
-- âœ… Pagamento via PIX mobile
-- âœ… WhatsApp para suporte
-- âœ… Loading rÃ¡pido (< 3s)
-
-## ðŸŽ¨ CustomizaÃ§Ã£o da Thank You Page
-
-```html
-<div style="text-align: center; padding: 40px;">
-    <h2>ðŸŽ‰ ParabÃ©ns! Compra realizada com sucesso!</h2>
-    <p>VocÃª receberÃ¡ o acesso ao curso por email em atÃ© 5 minutos.</p>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso NR10 2025 - R$ 29,90 | Capacite sua Equipe - MERASOL</title>
+    <meta name="description" content="Curso NR10 completo por R$ 29,90. Capacite autônomos, técnicos e empresas. Inclui NBR5410 e normas ANEEL. Certificado válido, 30 dias de garantia.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="conversion-optimizations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <div style="background: #f8f9fa; padding: 20px; margin: 20px 0; border-radius: 8px;">
-        <h3>ðŸ“š PrÃ³ximos Passos:</h3>
-        <ol style="text-align: left; max-width: 400px; margin: 0 auto;">
-            <li>Verifique seu email (inclusive spam)</li>
-            <li>Acesse o curso com suas credenciais</li>
-            <li>Comece pelo MÃ³dulo 1</li>
-            <li>Entre no grupo de suporte</li>
-        </ol>
-    </div>
+    <!-- Google Analytics (SUBSTITUIR G-XXXXXXXXXX pelo seu ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
     
-    <p><strong>Suporte:</strong> (14) 98838-3852 | contato@merasol.com.br</p>
+    <!-- Facebook Pixel (SUBSTITUIR SEU_PIXEL_ID) -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'SEU_PIXEL_ID');
+    fbq('track', 'PageView');
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-bolt"></i>
+                    <span>MERASOL</span>
+                </div>
+                <div class="header-cta">
+                    <span class="urgency-text">🔥 Últimas 47 vagas!</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <div class="hero-badge">
+                        🔥 CAPACITAÇÃO E ATUALIZAÇÃO PARA ÁREA DE ENERGIA
+                    </div>
+                    <h1 class="hero-title">
+                        CURSO NR10 2025<br>
+                        <span class="highlight">PARA TODOS DA ÁREA ELÉTRICA</span><br>
+                        DE <span class="old-price">R$ 197,90</span> POR APENAS <span class="price-highlight">R$ 29,90!</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        <strong>Autônomos, Técnicos, Empreendedores e Empresas:</strong> Capacite-se ou capacite sua equipe! 
+                        Evite Multas do MTE de até <strong>R$ 50.000</strong> e garanta conhecimento atualizado em NR10, NBR5410 e Normas ANEEL
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">15.000+</span>
+                            <span class="stat-label">Profissionais Capacitados</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">2.500+</span>
+                            <span class="stat-label">Empresas Atendidas</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">4.9/5</span>
+                            <span class="stat-label">Avaliação Geral</span>
+                        </div>
+                    </div>
+                    <div class="hero-cta">
+                        <!-- SUBSTITUIR ESTE BOTÃO PELO LINK DO SHOPIFY -->
+                        <button class="btn-primary" onclick="window.open('https://SEU_STORE.myshopify.com/products/curso-nr10-2025', '_blank')">
+                            🚀 QUERO ME CAPACITAR POR R$ 29,90
+                        </button>
+                        <p class="guarantee-text">
+                            <i class="fas fa-shield-alt"></i>
+                            30 dias de garantia incondicional
+                        </p>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <div class="hero-image">
+                        <img src="assets/images/nr10_seguranca.webp" alt="Profissional NR10">
+                        <div class="floating-badge">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certificado Válido</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resto do HTML continua igual... -->
     
-    <!-- Oferta Upsell -->
-    <div style="border: 2px solid #28a745; padding: 20px; margin: 20px 0; border-radius: 8px;">
-        <h3>âš¡ Oferta Especial!</h3>
-        <p>Aproveite para garantir tambÃ©m o <strong>Curso NR10 SEP</strong> com 50% de desconto!</p>
-        <a href="/products/curso-nr10-sep" style="background: #28a745; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
-            ðŸš€ QUERO O NR10 SEP
-        </a>
-    </div>
-</div>
-```
-
-Precisa de ajuda com algum passo especÃ­fico da integraÃ§Ã£o?
-
-
-
-
     <script src="script.js"></script>
 </body>
 </html>
+```
+
+## 🎨 CSS PRINCIPAL (styles.css)
+
+```css
+/* Reset e Variáveis */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #fbbf24;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --dark-color: #1f2937;
+    --light-color: #f8fafc;
+    --white: #ffffff;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--gray-800);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.logo i {
+    color: var(--secondary-color);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+    color: var(--white);
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-badge {
+    background: var(--secondary-color);
+    color: var(--dark-color);
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: var(--secondary-color);
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #ef4444;
+    font-size: 0.8em;
+}
+
+.price-highlight {
+    color: var(--success-color);
+    font-size: 1.2em;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* Botões */
+.btn-primary {
+    background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+    color: var(--white);
+    border: none;
+    padding: 18px 40px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 32px;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+}
+
+/* Animações */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+```
+
+## ⚡ JAVASCRIPT PRINCIPAL (script.js)
+
+```javascript
+// Inicialização quando página carrega
+document.addEventListener('DOMContentLoaded', function() {
+    initializeCountdown();
+    initializeSocialProof();
+    initializeScarcityCounter();
+    initializeScrollEffects();
+    initializeMobileOptimizations();
+});
+
+// Countdown Timer
+function initializeCountdown() {
+    const countdownElement = document.getElementById('countdown');
+    if (!countdownElement) return;
+    
+    // Define 3 horas a partir de agora
+    const endTime = new Date().getTime() + (3 * 60 * 60 * 1000);
+    
+    const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = endTime - now;
+        
+        if (distance < 0) {
+            clearInterval(timer);
+            // Reinicia o contador
+            initializeCountdown();
+            return;
+        }
+        
+        const hours = Math.floor(distance / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        document.querySelector('.countdown-hours').textContent = hours.toString().padStart(2, '0');
+        document.querySelector('.countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+        document.querySelector('.countdown-seconds').textContent = seconds.toString().padStart(2, '0');
+    }, 1000);
+}
+
+// Notificações Sociais
+function initializeSocialProof() {
+    const notifications = [
+        "João Silva (Autônomo) acabou de se capacitar - São Paulo/SP",
+        "Maria Santos (Técnica) garantiu sua certificação - Rio de Janeiro/RJ", 
+        "Pedro Oliveira (Empreendedor) capacitou sua equipe - Belo Horizonte/MG",
+        "Ana Costa (Empresa XYZ) treinou 8 funcionários - Salvador/BA",
+        "Carlos Ferreira (Autônomo) finalizou o curso - Porto Alegre/RS",
+        "Lucia Almeida (Técnica) se atualizou - Recife/PE",
+        "Roberto Lima (Empresa ABC) capacitou equipe - Fortaleza/CE",
+        "Fernanda Rocha (Empreendedora) se certificou - Curitiba/PR"
+    ];
+    
+    let currentIndex = 0;
+    
+    setInterval(() => {
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        
+        if (notification && notificationText) {
+            notificationText.textContent = notifications[currentIndex];
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+            
+            currentIndex = (currentIndex + 1) % notifications.length;
+        }
+    }, 8000);
+}
+
+// Contador de Escassez
+function initializeScarcityCounter() {
+    let remainingSpots = 47;
+    const spotElement = document.getElementById('remainingSpots');
+    
+    if (!spotElement) return;
+    
+    setInterval(() => {
+        if (Math.random() < 0.3 && remainingSpots > 10) {
+            remainingSpots--;
+            spotElement.textContent = remainingSpots;
+            
+            // Animação de flash
+            spotElement.style.color = '#ef4444';
+            setTimeout(() => {
+                spotElement.style.color = '';
+            }, 500);
+        }
+    }, 15000);
+}
+
+// Scroll para oferta
+function scrollToOffer() {
+    const offerSection = document.getElementById('offer');
+    if (offerSection) {
+        offerSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+// Efeitos de Scroll
+function initializeScrollEffects() {
+    const header = document.getElementById('header');
+    const floatingCta = document.getElementById('floatingCta');
+    
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        
+        // Header sticky
+        if (scrollY > 100) {
+            header.classList.add('sticky');
+        } else {
+            header.classList.remove('sticky');
+        }
+        
+        // CTA flutuante
+        if (scrollY > 800) {
+            floatingCta.style.display = 'block';
+        } else {
+            floatingCta.style.display = 'none';
+        }
+    });
+}
+
+// Otimizações Mobile
+function initializeMobileOptimizations() {
+    const mobileCta = document.getElementById('mobileCta');
+    
+    // Detectar mobile
+    if (window.innerWidth <= 768) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                mobileCta.style.display = 'block';
+            } else {
+                mobileCta.style.display = 'none';
+            }
+        });
+    }
+}
+
+// Tracking de Eventos
+function trackEvent(eventName, parameters = {}) {
+    // Google Analytics
+    if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, parameters);
+    }
+    
+    // Facebook Pixel
+    if (typeof fbq !== 'undefined') {
+        fbq('track', eventName, parameters);
+    }
+}
+
+// Tracking de cliques nos botões
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('btn-primary')) {
+        trackEvent('begin_checkout', {
+            currency: 'BRL',
+            value: 29.90,
+            items: [{
+                item_id: 'NR10-2025-MERASOL',
+                item_name: 'Curso NR10 2025',
+                category: 'Curso Digital',
+                quantity: 1,
+                price: 29.90
+            }]
+        });
+    }
+});
+```
+
+## 🔧 CONFIGURAÇÃO VERCEL (vercel.json)
+
+```json
+{
+  "version": 2,
+  "name": "landing-nr10-merasol",
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
+```
+
+## 🛒 INTEGRAÇÃO SHOPIFY
+
+### Substituir Botões:
+```html
+<!-- ANTES (botão atual): -->
+<button class="btn-primary" onclick="scrollToOffer()">
+    🚀 QUERO ME CAPACITAR POR R$ 29,90
+</button>
+
+<!-- DEPOIS (com Shopify): -->
+<button class="btn-primary" onclick="window.open('https://SEU_STORE.myshopify.com/products/curso-nr10-2025', '_blank')">
+    🚀 QUERO ME CAPACITAR POR R$ 29,90
+</button>
+```
+
+### Checkout Direto:
+```html
+<button class="btn-primary" onclick="window.open('https://SEU_STORE.myshopify.com/cart/add?id=PRODUCT_ID&quantity=1&return_to=/checkout', '_blank')">
+    🚀 QUERO ME CAPACITAR POR R$ 29,90
+</button>
+```
+
+## 📋 CHECKLIST DE IMPLEMENTAÇÃO
+
+### ✅ Antes de Publicar:
+- [ ] Substituir URLs do Shopify nos botões
+- [ ] Adicionar Google Analytics ID
+- [ ] Adicionar Facebook Pixel ID
+- [ ] Testar em mobile e desktop
+- [ ] Verificar todas as imagens
+- [ ] Testar velocidade da página
+- [ ] Configurar domínio (se aplicável)
+
+### ✅ Após Publicar:
+- [ ] Testar compra completa
+- [ ] Verificar tracking funcionando
+- [ ] Configurar emails pós-compra
+- [ ] Monitorar conversões
+- [ ] Otimizar baseado em dados
+
+---
