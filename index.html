@@ -1,565 +1,217 @@
+# Integração com Shopify - Curso NR10
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.    <title>Curso NR10 2025 - R$ 29,90 | Capacite sua Equipe - MERASOL</title>
-    <meta name="description" content="Curso NR10 completo por R$ 29,90. Capacite autônomos, técnicos e empresas. Inclui NBR5410 e normas ANEEL. Certificado válido, 30 dias de garantia.">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="conversion-optimizations.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+## 🛒 Configuração do Produto no Shopify
+
+### 1. Criar Produto Digital
+
+**Informações Básicas:**
+- **Título:** Curso NR10 2025 - Capacitação Completa
+- **Descrição:** Curso completo de NR10 para autônomos, técnicos, empreendedores e empresas. Inclui NBR5410 e normas ANEEL.
+- **Preço:** R$ 29,90
+- **Preço comparativo:** R$ 197,90
+- **SKU:** NR10-2025-MERASOL
+- **Código de barras:** (deixe vazio)
+
+**Configurações de Envio:**
+- ✅ Este é um produto digital
+- ✅ Não requer envio físico
+
+**Configurações de Estoque:**
+- ✅ Não rastrear quantidade
+- ✅ Continuar vendendo quando fora de estoque
+
+**SEO:**
+- **Título SEO:** Curso NR10 2025 - R$ 29,90 | MERASOL
+- **Meta descrição:** Curso NR10 completo por R$ 29,90. Capacitação para área elétrica com certificado válido. 30 dias de garantia.
+
+### 2. Configurar Checkout
+
+**Configurações de Pagamento:**
+```
+PIX: 5% desconto (R$ 28,40)
+Cartão: 12x de R$ 2,49
+Boleto: R$ 29,90
+```
+
+**Configurações de Entrega Digital:**
+- Configurar email automático com link de acesso
+- Incluir instruções de acesso ao curso
+- Adicionar dados de contato da MERASOL
+
+## 🔗 Integração com Landing Page
+
+### Opção 1: Redirecionamento Direto
+
+Substitua os botões atuais por:
+
+```html
+<!-- Botão Principal -->
+<button onclick="window.open('https://merasol.myshopify.com/products/curso-nr10-2025', '_blank')" class="btn-primary">
+    🚀 QUERO ME CAPACITAR POR R$ 29,90
+</button>
+
+<!-- Botão Flutuante -->
+<button onclick="window.open('https://merasol.myshopify.com/products/curso-nr10-2025', '_blank')" class="btn-floating">
+    ⚡ CAPACITAR-SE - R$ 29,90
+</button>
+
+<!-- Botão Mobile -->
+<button onclick="window.open('https://merasol.myshopify.com/products/curso-nr10-2025', '_blank')">
+    🚀 CAPACITAR POR R$ 29,90
+</button>
+```
+
+### Opção 2: Add to Cart Direto
+
+```html
+<!-- Adicionar diretamente ao carrinho -->
+<button onclick="window.open('https://merasol.myshopify.com/cart/add?id=PRODUCT_VARIANT_ID&quantity=1', '_blank')" class="btn-primary">
+    🚀 QUERO ME CAPACITAR POR R$ 29,90
+</button>
+```
+
+### Opção 3: Buy Now Button (Mais Conversão)
+
+```html
+<!-- Compra direta (pula carrinho) -->
+<button onclick="window.open('https://merasol.myshopify.com/cart/add?id=PRODUCT_VARIANT_ID&quantity=1&return_to=/checkout', '_blank')" class="btn-primary">
+    🚀 QUERO ME CAPACITAR POR R$ 29,90
+</button>
+```
+
+## 📊 Tracking de Conversões
+
+### Google Analytics Enhanced Ecommerce
+
+Adicione no script.js:
+
+```javascript
+// Tracking de clique no botão
+function trackPurchaseClick() {
+    gtag('event', 'begin_checkout', {
+        currency: 'BRL',
+        value: 29.90,
+        items: [{
+            item_id: 'NR10-2025-MERASOL',
+            item_name: 'Curso NR10 2025',
+            category: 'Curso Digital',
+            quantity: 1,
+            price: 29.90
+        }]
+    });
+}
+
+// Adicionar aos botões
+document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('click', trackPurchaseClick);
+});
+```
+
+### Facebook Pixel
+
+```javascript
+// Tracking de evento de compra
+function trackFacebookPurchase() {
+    fbq('track', 'InitiateCheckout', {
+        value: 29.90,
+        currency: 'BRL',
+        content_name: 'Curso NR10 2025',
+        content_category: 'Curso Digital',
+        content_ids: ['NR10-2025-MERASOL'],
+        content_type: 'product'
+    });
+}
+```
+
+## 🎯 Configurações de Conversão no Shopify
+
+### 1. Abandoned Cart Recovery
+- Configurar emails automáticos para carrinho abandonado
+- Oferecer desconto progressivo (5%, 10%, 15%)
+- Enviar após 1h, 24h e 72h
+
+### 2. Upsells e Cross-sells
+- Oferecer curso NR10 SEP como upsell
+- Sugerir materiais complementares
+- Bundle com outros cursos
+
+### 3. Reviews e Testimonials
+- Configurar app de reviews (Judge.me, Yotpo)
+- Solicitar avaliações por email pós-compra
+- Exibir reviews na página do produto
+
+## 📧 Email Marketing
+
+### Sequência de Emails Pós-Compra:
+1. **Imediato:** Confirmação e acesso ao curso
+2. **1 dia:** Boas-vindas e primeiros passos
+3. **3 dias:** Dicas de estudo e suporte
+4. **7 dias:** Check-in de progresso
+5. **15 dias:** Oferta curso NR10 SEP
+6. **30 dias:** Solicitação de review
+
+### Template de Email de Acesso:
+
+```html
+Assunto: ✅ Seu acesso ao Curso NR10 2025 está liberado!
+
+Olá [NOME],
+
+Parabéns! Seu acesso ao Curso NR10 2025 foi liberado.
+
+🔗 ACESSAR CURSO: [LINK]
+👤 Login: [EMAIL]
+🔑 Senha: [SENHA_TEMPORARIA]
+
+📞 Suporte: (14) 98838-3852
+📧 Email: contato@merasol.com.br
+
+MERASOL Soluções em Engenharia e Consultoria
+```
+
+## 🔧 Apps Recomendados para Shopify
+
+1. **Bold Upsell** - Para ofertas complementares
+2. **Klaviyo** - Email marketing avançado
+3. **Judge.me** - Sistema de reviews
+4. **ReConvert** - Thank you page otimizada
+5. **Gorgias** - Atendimento ao cliente
+6. **Digital Downloads** - Entrega de produtos digitais
+
+## 📱 Configuração Mobile
+
+Certifique-se de que:
+- ✅ Checkout mobile otimizado
+- ✅ Pagamento via PIX mobile
+- ✅ WhatsApp para suporte
+- ✅ Loading rápido (< 3s)
+
+## 🎨 Customização da Thank You Page
+
+```html
+<div style="text-align: center; padding: 40px;">
+    <h2>🎉 Parabéns! Compra realizada com sucesso!</h2>
+    <p>Você receberá o acesso ao curso por email em até 5 minutos.</p>
     
-    <!-- SEO Meta Tags -->
-    <meta name="keywords" content="curso nr10, nr10 online, capacitação elétrica, segurança elétrica, nbr5410, normas aneel, nr10 sep, curso eletricista">
-    <meta name="author" content="Capacitação Elétrica Brasil">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.cursonr10.com.br">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Curso NR10 Atualizado 2025 - R$ 29,90 | Capacitação Elétrica Completa">
-    <meta property="og:description" content="Curso NR10 mais completo do Brasil por apenas R$ 29,90. Inclui NBR5410, Normas ANEEL e preparação NR10 SEP. Evite multas MTE!">
-    <meta property="og:image" content="assets/images/nr10_seguranca.webp">
-    <meta property="og:url" content="https://www.cursonr10.com.br">
-    <meta property="og:type" content="website">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Curso NR10 Atualizado 2025 - R$ 29,90">
-    <meta name="twitter:description" content="Capacitação elétrica completa com NBR5410 e Normas ANEEL">
-    <meta name="twitter:image" content="assets/images/nr10_seguranca.webp">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        "name": "Curso NR10 Atualizado 2025",
-        "description": "Curso completo de NR10 com NBR5410 e Normas ANEEL",
-        "provider": {
-            "@type": "Organization",
-            "name": "Capacitação Elétrica Brasil",
-            "sameAs": "https://www.cursonr10.com.br"
-        },
-        "offers": {
-            "@type": "Offer",
-            "price": "29.90",
-            "priceCurrency": "BRL",
-            "availability": "https://schema.org/InStock"
-        }
-    }
-    </script>
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-bolt"></i>
-                    <span>MERASOL</span>
-                </div>
-                <div class="header-cta">
-                    <span class="urgency-text">⚡ Últimas 47 vagas!</span>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-left">
-                    <div class="hero-badge">
-                        🔥 CAPACITAÇÃO E ATUALIZAÇÃO PARA ÁREA DE ENERGIA
-                    </div>
-                    <h1 class="hero-title">
-                        CURSO NR10 2025<br>
-                        <span class="highlight">PARA TODOS DA ÁREA ELÉTRICA</span><br>
-                        DE <span class="old-price">R$ 197,90</span> POR APENAS <span class="price-highlight">R$ 29,90!</span>
-                    </h1>
-                    <p class="hero-subtitle">
-                        <strong>Autônomos, Técnicos, Empreendedores e Empresas:</strong> Capacite-se ou capacite sua equipe! 
-                        Evite Multas do MTE de até <strong>R$ 50.000</strong> e garanta conhecimento atualizado em NR10, NBR5410 e Normas ANEEL
-                    </p>
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <span class="stat-number">15.000+</span>
-                            <span class="stat-label">Profissionais Capacitados</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">2.500+</span>
-                            <span class="stat-label">Empresas Atendidas</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">4.9/5</span>
-                            <span class="stat-label">Avaliação Geral</span>
-                        </div>
-                    </div>
-                    <div class="hero-cta">
-                        <button class="btn-primary" onclick="scrollToOffer()">
-                            🚀 QUERO ME CAPACITAR POR R$ 29,90
-                        </button>
-                        <p class="guarantee-text">
-                            <i class="fas fa-shield-alt"></i>
-                            30 dias de garantia incondicional
-                        </p>
-                    </div>
-                </div>
-                <div class="hero-right">
-                    <div class="hero-image">
-                        <img src="assets/images/eletricista_seguranca.webp" alt="Eletricista trabalhando com segurança">
-                        <div class="floating-badge">
-                            <i class="fas fa-certificate"></i>
-                            <span>Certificado Válido</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Social Proof Bar -->
-    <section class="social-proof-bar">
-        <div class="container">
-            <p><strong>🔥 ATENÇÃO:</strong> Mais de 847 profissionais visitaram esta página nas últimas 24 horas | <strong>15.000+ já capacitados</strong> | <strong>Autônomos, Técnicos, Empresas</strong></p>
-        </div>
-    </section>
-
-    <!-- Trust Badges -->
-    <section style="padding: 40px 0; background: #F8FAFC;">
-        <div class="container">
-            <div class="trust-badges">
-                <div class="trust-badge">
-                    <i class="fas fa-certificate"></i>
-                    <span>Certificado Válido</span>
-                </div>
-                <div class="trust-badge">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>30 Dias Garantia</span>
-                </div>
-                <div class="trust-badge">
-                    <i class="fas fa-clock"></i>
-                    <span>Acesso Vitalício</span>
-                </div>
-                <div class="trust-badge">
-                    <i class="fas fa-headset"></i>
-                    <span>Suporte 7 Dias</span>
-                </div>
-                <div class="trust-badge">
-                    <i class="fas fa-mobile-alt"></i>
-                    <span>Acesso Mobile</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Problem Section -->
-    <section class="problem">
-        <div class="container">
-            <div class="section-header">
-                <h2>⚠️ VOCÊ ESTÁ PERDENDO OPORTUNIDADES NA ÁREA ELÉTRICA?</h2>
-                <p>Milhares de profissionais da área de energia enfrentam diariamente estes problemas:</p>
-            </div>
-            <div class="problem-grid">
-                <div class="problem-card">
-                    <div class="problem-icon">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>Autônomos & Técnicos</h3>
-                    <ul>
-                        <li>Trabalham sem capacitação adequada em NR10</li>
-                        <li>Perdem oportunidades por falta de certificação</li>
-                        <li>Correm risco de acidentes por desconhecimento</li>
-                        <li>Ficam desatualizados sobre normas técnicas</li>
-                    </ul>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <h3>Empreendedores & Empresas</h3>
-                    <ul>
-                        <li>Equipes despreparadas para trabalhar com eletricidade</li>
-                        <li>Risco de multas pesadas do MTE (até R$ 50.000)</li>
-                        <li>Processos trabalhistas milionários por acidentes</li>
-                        <li>Perda de contratos por falta de conformidade</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="scary-stats">
-                <h3>A Realidade Assustadora:</h3>
-                <div class="stats-grid">
-                    <div class="scary-stat">
-                        <span class="stat-big">600+</span>
-                        <span class="stat-desc">Mortes por choque elétrico/ano</span>
-                    </div>
-                    <div class="scary-stat">
-                        <span class="stat-big">R$ 50.000</span>
-                        <span class="stat-desc">Multa MTE por funcionário</span>
-                    </div>
-                    <div class="scary-stat">
-                        <span class="stat-big">R$ 500.000</span>
-                        <span class="stat-desc">Custo médio processo trabalhista</span>
-                    </div>
-                    <div class="scary-stat">
-                        <span class="stat-big">80%</span>
-                        <span class="stat-desc">Empresas não sabem implementar NR10</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Solution Section -->
-    <section class="solution">
-        <div class="container">
-            <div class="section-header">
-                <h2>✅ A SOLUÇÃO DEFINITIVA PARA TODA ÁREA DE ENERGIA</h2>
-                <p>Apresentamos o <strong>Curso NR10 Completo 2025</strong> - para autônomos, técnicos, empreendedores e empresas</p>
-            </div>
-            <div class="solution-content">
-                <div class="solution-left">
-                    <img src="assets/images/nr10_seguranca.webp" alt="NR10 Segurança Elétrica">
-                </div>
-                <div class="solution-right">
-                    <h3>Por que nosso curso é ideal para todos da área elétrica?</h3>
-                    <p>Nosso Curso NR10 foi desenvolvido para atender <strong>autônomos, técnicos, empreendedores e empresas</strong> que trabalham com instalações elétricas de baixa tensão. Incluímos conteúdo sobre <strong>NBR5410</strong> e <strong>normas ANEEL</strong> para capacitação e atualização completa.</p>
-                    
-                    <div class="coverage-list">
-                        <div class="coverage-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span><strong>NR10 2025:</strong> Atualizada para baixa tensão (até 1000V)</span>
-                        </div>
-                        <div class="coverage-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span><strong>NBR5410:</strong> Instalações elétricas de baixa tensão</span>
-                        </div>
-                        <div class="coverage-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span><strong>Normas ANEEL:</strong> Regulamentações para área de energia</span>
-                        </div>
-                        <div class="coverage-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span><strong>Capacitação Completa:</strong> Para todos os profissionais da área</span>
-                        </div>
-                        <div class="coverage-item">
-                            <i class="fas fa-info-circle"></i>
-                            <span><strong>NR10 SEP:</strong> Oferecemos curso separado para alta tensão</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="benefits">
-        <div class="container">
-            <div class="section-header">
-                <h2>🎯 CAPACITE-SE E TRANSFORME SUA CARREIRA NA ÁREA ELÉTRICA</h2>
-            </div>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Segurança Garantida</h3>
-                    <p>Aprenda técnicas avançadas de segurança elétrica e reduza em 95% o risco de acidentes.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Valorização Profissional</h3>
-                    <p>Profissionais certificados ganham em média 40% a mais que os não certificados.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3>Oportunidades Ilimitadas</h3>
-                    <p>Acesso a vagas em usinas solares, indústrias e grandes empresas do setor.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-gavel"></i>
-                    </div>
-                    <h3>Conformidade Legal</h3>
-                    <p>Atenda 100% das exigências do MTE e evite multas de até R$ 50.000.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-money-bill-wave"></i>
-                    </div>
-                    <h3>Redução de Custos</h3>
-                    <p>Evite processos trabalhistas que podem custar mais de R$ 500.000.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h3>Vantagem Competitiva</h3>
-                    <p>Empresas com funcionários certificados têm preferência em licitações.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Content Section -->
-    <section class="content">
-        <div class="container">
-            <div class="section-header">
-                <h2>📚 CONTEÚDO ESPECÍFICO PARA NR10</h2>
-                <p>8 módulos focados em baixa tensão com mais de 30 horas de conteúdo exclusivo</p>
-            </div>
-            <div class="modules-grid">
-                <div class="module-card">
-                    <div class="module-number">01</div>
-                    <h3>Fundamentos da NR10</h3>
-                    <p>Introdução à segurança elétrica em baixa tensão e responsabilidades legais.</p>
-                </div>
-                <div class="module-card">
-                    <div class="module-number">02</div>
-                    <h3>NBR5410: Baixa Tensão</h3>
-                    <p>Instalações até 1000V, dispositivos DR, dimensionamento e aterramento.</p>
-                </div>
-                <div class="module-card">
-                    <div class="module-number">03</div>
-                    <h3>Normas ANEEL</h3>
-                    <p>Regulamentações essenciais para empresas e geração distribuída.</p>
-                </div>
-                <div class="module-card">
-                    <div class="module-number">04</div>
-                    <h3>Riscos em Baixa Tensão</h3>
-                    <p>Identificação e prevenção de riscos específicos até 1000V.</p>
-                </div>
-                <div class="module-card">
-                    <div class="module-number">05</div>
-                    <h3>Equipamentos de Proteção</h3>
-                    <p>EPIs, EPCs, ferramentas isoladas específicas para baixa tensão.</p>
-                </div>
-                <div class="module-card">
-                    <div class="module-number">06</div>
-                    <h3>Primeiros Socorros</h3>
-                    <p>Atendimento a vítimas de choque elétrico e emergências.</p>
-                </div>
-                <div class="module-card">
-                    <div class="module-number">07</div>
-                    <h3>Equipamentos de Proteção</h3>
-                    <p>EPIs, EPCs, ferramentas isoladas e detectores de tensão.</p>
-                </div>
-                <div class="module-card">
-                    <div class="module-number">08</div>
-                    <h3>Casos Práticos Empresariais</h3>
-                    <p>Análise de situações reais em empresas e procedimentos seguros.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2>💬 O QUE PROFISSIONAIS DA ÁREA ESTÃO DIZENDO</h2>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"Como autônomo, o curso me deu a certificação que eu precisava para conseguir contratos maiores. O investimento de R$ 29,90 se pagou na primeira semana com novos clientes."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <strong>João Silva</strong>
-                            <span>Eletricista Autônomo</span>
-                        </div>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"Capacitei toda minha equipe de 12 funcionários. Não tivemos mais acidentes e a produtividade aumentou 40%. Melhor investimento para minha empresa."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <strong>Ana Rodrigues</strong>
-                            <span>Empreendedora - Elétrica AR</span>
-                        </div>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"Conteúdo muito superior aos cursos presenciais. Como técnico, o módulo sobre NBR5410 me deu conhecimento que não encontro em outros lugares."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <strong>Roberto Santos</strong>
-                            <span>Técnico em Eletrotécnica</span>
-                        </div>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Urgency Section -->
-    <section class="urgency" id="offer">
-        <div class="container">
-            <div class="urgency-content">
-                <div class="urgency-indicator">⚠️ CAPACITAÇÃO E ATUALIZAÇÃO PARA ÁREA DE ENERGIA</div>
-                <div class="urgency-header">
-                    <h2>⏰ OFERTA LIMITADA - ÚLTIMAS VAGAS!</h2>
-                    <p>Valor normal: <span class="old-price price-strike">R$ 197,90</span> | Hoje apenas: <span class="new-price">R$ 29,90</span> por pessoa</p>
-                </div>
-                <div class="scarcity-counter">
-                    <div class="scarcity-text">RESTAM APENAS</div>
-                    <div class="scarcity-number" id="remainingSpots">47</div>
-                    <div class="scarcity-text">VAGAS DAS 500 DISPONÍVEIS</div>
-                </div>
-                <div class="countdown-container">
-                    <div class="countdown" id="countdown">
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="hours">02</span>
-                            <span class="countdown-label">Horas</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="minutes">47</span>
-                            <span class="countdown-label">Minutos</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="seconds">33</span>
-                            <span class="countdown-label">Segundos</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="offer-details">
-                    <div class="price-comparison">
-                        <div class="comparison-item">
-                            <h4>Curso Presencial</h4>
-                            <span class="comparison-price">R$ 400 - R$ 800</span>
-                        </div>
-                        <div class="vs">VS</div>
-                        <div class="comparison-item highlight">
-                            <h4>Nosso Curso Online</h4>
-                            <span class="comparison-price">R$ 29,90</span>
-                        </div>
-                    </div>
-                    <div class="savings">
-                        <span class="savings-text">ECONOMIA DE ATÉ R$ 770 POR PESSOA!</span>
-                    </div>
-                </div>
-                <div class="payment-options">
-                    <div class="payment-option">
-                        <i class="fas fa-qrcode"></i>
-                        <span>PIX: R$ 28,40 (5% desconto)</span>
-                    </div>
-                    <div class="payment-option">
-                        <i class="fas fa-credit-card"></i>
-                        <span>Cartão: 12x de R$ 2,49</span>
-                    </div>
-                    <div class="payment-option">
-                        <i class="fas fa-barcode"></i>
-                        <span>Boleto: R$ 29,90</span>
-                    </div>
-                </div>
-                <div class="cta-container">
-                    <button class="btn-primary large">
-                        🚀 QUERO ME CAPACITAR POR R$ 29,90
-                    </button>
-                    <p class="guarantee-text">
-                        <i class="fas fa-shield-alt"></i>
-                        30 dias de garantia incondicional
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="logo">
-                        <i class="fas fa-bolt"></i>
-                        <span>Capacitação Elétrica</span>
-                    </div>
-                    <p>Mais de 2 anos capacitando profissionais na área elétrica. Mais de 15.000 alunos e 2.500 empresas capacitadas.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <p><i class="fas fa-envelope"></i> contato@merasol.com.br</p>
-                    <p><i class="fas fa-phone"></i> (14) 98838-3852</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Uberaba - MG Brasil</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Certificações</h4>
-                    <p>✅ Reconhecida pelo MTE</p>
-                    <p>✅ Membro da ABRACOPEL</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 MERASOL Soluções em Engenharia e Consultoria. CNPJ: 42.796.707/0001-04</p>
-                <div class="security-badges">
-                    <span><i class="fas fa-lock"></i> Site 100% Seguro</span>
-                    <span><i class="fas fa-shield-alt"></i> SSL Certificado</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Floating CTA -->
-    <div class="floating-cta" id="floatingCta">
-        <button class="btn-floating" onclick="scrollToOffer()">
-            ⚡ CAPACITAR-SE - R$ 29,90
-        </button>
+    <div style="background: #f8f9fa; padding: 20px; margin: 20px 0; border-radius: 8px;">
+        <h3>📚 Próximos Passos:</h3>
+        <ol style="text-align: left; max-width: 400px; margin: 0 auto;">
+            <li>Verifique seu email (inclusive spam)</li>
+            <li>Acesse o curso com suas credenciais</li>
+            <li>Comece pelo Módulo 1</li>
+            <li>Entre no grupo de suporte</li>
+        </ol>
     </div>
-
-    <!-- Mobile Sticky CTA -->
-    <div class="mobile-sticky-cta" id="mobileCta" style="display: none;">
-        <button onclick="scrollToOffer()">
-            🚀 CAPACITAR POR R$ 29,90
-        </button>
+    
+    <p><strong>Suporte:</strong> (14) 98838-3852 | contato@merasol.com.br</p>
+    
+    <!-- Oferta Upsell -->
+    <div style="border: 2px solid #28a745; padding: 20px; margin: 20px 0; border-radius: 8px;">
+        <h3>⚡ Oferta Especial!</h3>
+        <p>Aproveite para garantir também o <strong>Curso NR10 SEP</strong> com 50% de desconto!</p>
+        <a href="/products/curso-nr10-sep" style="background: #28a745; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
+            🚀 QUERO O NR10 SEP
+        </a>
     </div>
-
-    <!-- Reading Progress Bar -->
-    <div class="reading-progress" id="readingProgress"></div>
-
-    <!-- Notification -->
-    <div class="notification" id="notification">
-        <span id="notificationText">João Silva (Autônomo) acabou de se capacitar - São Paulo/SP</span>
-    </div>
-
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+</div>
+```
